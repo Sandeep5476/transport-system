@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Transport Portal - Sandeep</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> </head>
+<body>
+
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>Transport Portal</h3>
+            </div>
+            <ul>
+                <li><a href="#" class="nav-link active" data-target="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-target="profile"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#" class="nav-link" data-target="bus-route"><i class="fas fa-route"></i> Bus Route</a></li>
+                <li><a href="#" class="nav-link" data-target="schedules"><i class="fas fa-clock"></i> Schedules</a></li>
+                <li><a href="#" class="nav-link" data-target="attendance"><i class="fas fa-check-circle"></i> Attendance</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Welcome, narasimha</h2>
+                <button id="addDetailsBtn" class="cta-button">Add / Edit Details</button>
+            </header>
+
+            <div id="dashboard" class="content-section active">
+                <h2>Dashboard Overview</h2>
+                <p>Welcome to your transportation portal. Click "Add / Edit Details" to get started or use the sidebar to navigate.</p>
+                <div class="card-container">
+                     <div class="card" data-target="profile">
+                        <h4><i class="fas fa-user"></i> Student Profile</h4>
+                        <p>View personal and parent details.</p>
+                    </div>
+                     <div class="card" data-target="bus-route">
+                        <h4><i class="fas fa-route"></i> Bus Route</h4>
+                        <p>Check your route and stops.</p>
+                    </div>
+                     <div class="card" data-target="schedules">
+                        <h4><i class="fas fa-clock"></i> Schedules</h4>
+                        <p>View bus timings.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profile" class="content-section">
+                <h2>Profile Details</h2>
+                <div class="details-grid">
+                    <div><strong>Student Name:</strong> <span id="display_student_name">Sandeep</span></div>
+                    <div><strong>Roll No:</strong> <span id="display_roll_no">Not Set</span></div>
+                    <div><strong>Parent Name:</strong> <span id="display_parent_name">Not Set</span></div>
+                    <div><strong>Parent Phone:</strong> <span id="display_parent_phone">Not Set</span></div>
+                    <div class="grid-span-2"><strong>College Dept:</strong> <span id="display_college_details">Not Set</span></div>
+                    <div class="grid-span-2"><strong>Driver Details:</strong> <span id="display_driver_details">Not Set</span></div>
+                </div>
+            </div>
+
+            <div id="bus-route" class="content-section">
+                <h2>Bus Route Details</h2>
+                <p><strong>Bus Number:</strong> <span id="display_bus_number">Not Set</span> | <strong>City:</strong> <span id="display_bus_route_city">Not Set</span></p>
+                <div class="timeline" id="timeline_container">
+                    <p>Route details not set.</p>
+                </div>
+            </div>
+
+            <div id="schedules" class="content-section">
+                <h2>Bus Schedules</h2>
+                <div class="schedule-item">
+                    <h3>Morning</h3>
+                    <p><strong>Departure:</strong> 8:00 AM</p>
+                    <p>From: Starting Point</p>
+                </div>
+                 <div class="schedule-item">
+                    <h3>Evening</h3>
+                    <p><strong>Departure:</strong> 5:00 PM</p>
+                    <p>From: College Campus</p>
+                </div>
+            </div>
+
+            <div id="attendance" class="content-section">
+                <h2>Attendance Log</h2>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>June 16, 2025</td>
+                            <td>Present</td>
+                        </tr>
+                         <tr>
+                            <td>June 15, 2025</td>
+                            <td>Present</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add Your Details</h2>
+            <form id="detailsForm">
+                <div class="form-group">
+                    <label for="studentName">Student Name</label>
+                    <input type="text" id="studentName" value="Sandeep" readonly>
+                </div>
+                 <div class="form-group">
+                    <label for="rollNo">Student Roll No</label>
+                    <input type="text" id="rollNo" required>
+                </div>
+                <div class="form-group">
+                    <label for="parentName">Parent Name</label>
+                    <input type="text" id="parentName" required>
+                </div>
+                 <div class="form-group">
+                    <label for="parentPhone">Parent Phone Number</label>
+                    <input type="tel" id="parentPhone" required>
+                </div>
+                 <div class="form-group">
+                    <label for="collegeDetails">College Transportation Details</label>
+                    <input type="text" id="collegeDetails" placeholder="e.g., IT Department" required>
+                </div>
+                 <div class="form-group">
+                    <label for="busNumber">Bus Number</label>
+                    <input type="text" id="busNumber" required>
+                </div>
+                 <div class="form-group">
+                    <label for="busRouteCity">Bus Route (City)</label>
+                    <input type="text" id="busRouteCity" required>
+                </div>
+                 <div class="form-group">
+                    <label for="startPoint">Route - Starting Point</label>
+                    <input type="text" id="startPoint" required>
+                </div>
+                <div class="form-group">
+                    <label for="intermediateStops">Route - Intermediate Stops (comma-separated)</label>
+                    <input type="text" id="intermediateStops" placeholder="e.g., Stop A, Stop B">
+                </div>
+                 <div class="form-group">
+                    <label for="endPoint">Route - Ending Point</label>
+                    <input type="text" id="endPoint" required>
+                </div>
+                 <div class="form-group">
+                    <label for="driverDetails">Driver Details</label>
+                    <input type="text" id="driverDetails" placeholder="e.g., Mr. Raj, 9876543210" required>
+                </div>
+                <button type="submit" class="cta-button">Save Details</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/f9be745423.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
