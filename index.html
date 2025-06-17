@@ -22,12 +22,13 @@
                 <li><a href="#" class="nav-link" data-target="bus-route"><i class="fas fa-route"></i> Bus Route</a></li>
                 <li><a href="#" class="nav-link" data-target="schedules"><i class="fas fa-clock"></i> Schedules</a></li>
                 <li><a href="#" class="nav-link" data-target="attendance"><i class="fas fa-check-circle"></i> Attendance</a></li>
+                <li><a href="#" class="nav-link" data-target="management-details"><i class="fas fa-briefcase"></i> Management Details</a></li>
             </ul>
         </nav>
 
         <main class="main-content">
             <header class="main-header">
-                <h1>Welcome, Sandeep</h1>
+                <h2>Welcome, Sandeep</h2>
                 <button id="addDetailsBtn" class="cta-button">Add / Edit Details</button>
             </header>
 
@@ -46,6 +47,10 @@
                      <div class="card" data-target="schedules">
                         <h4><i class="fas fa-clock"></i> Schedules</h4>
                         <p>View bus timings.</p>
+                    </div>
+                     <div class="card" data-target="management-details">
+                        <h4><i class="fas fa-briefcase"></i> Management Details</h4>
+                        <p>View and add management information.</p>
                     </div>
                 </div>
             </div>
@@ -93,17 +98,40 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>June 16, 2025</td>
-                            <td>Present</td>
-                        </tr>
-                         <tr>
-                            <td>June 15, 2025</td>
-                            <td>Present</td>
-                        </tr>
+                    <tbody id="attendanceTableBody">
+                        <!-- Attendance rows will be inserted here by JS -->
                     </tbody>
                 </table>
+            </div>
+
+            <div id="management-details" class="content-section">
+                <h2>Management Details</h2>
+                <form id="managementForm">
+                    <div class="form-group">
+                        <label for="managerName">Manager Name</label>
+                        <input type="text" id="managerName" required placeholder="Please enter bus manager">
+                    </div>
+                    <div class="form-group">
+                        <label for="managerPhone">Manager Phone</label>
+                        <input type="tel" id="managerPhone" required placeholder="Please enter manager phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="managerEmail">Manager Email</label>
+                        <input type="email" id="managerEmail" required placeholder="Please enter manager email">
+                    </div>
+                    <div class="form-group">
+                        <label for="managerNotes">Notes</label>
+                        <textarea id="managerNotes" rows="3" placeholder="Additional notes (optional)"></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Save Management Details</button>
+                </form>
+                <div id="managementDisplay" style="margin-top:20px;display:none;">
+                    <h3>Saved Management Details</h3>
+                    <p><strong>Name:</strong> <span id="display_manager_name"></span></p>
+                    <p><strong>Phone:</strong> <span id="display_manager_phone"></span></p>
+                    <p><strong>Email:</strong> <span id="display_manager_email"></span></p>
+                    <p><strong>Notes:</strong> <span id="display_manager_notes"></span></p>
+                </div>
             </div>
 
         </main>
