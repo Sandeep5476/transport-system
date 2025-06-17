@@ -164,4 +164,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     populateFromStorage();
+
+    // --- Management Details Form Logic ---
+    const managementForm = document.getElementById('managementForm');
+    const managementDisplay = document.getElementById('managementDisplay');
+    if (managementForm) {
+        managementForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const managerName = document.getElementById('managerName').value;
+            const managerPhone = document.getElementById('managerPhone').value;
+            const managerEmail = document.getElementById('managerEmail').value;
+            const managerNotes = document.getElementById('managerNotes').value;
+            // Save to localStorage
+            localStorage.setItem('managementDetails', JSON.stringify({ managerName, managerPhone, managerEmail, managerNotes }));
+            // Display
+            document.getElementById('display_manager_name').textContent = managerName;
+            document.getElementById('display_manager_phone').textContent = managerPhone;
+            document.getElementById('display_manager_email').textContent = managerEmail;
+            document.getElementById('display_manager_notes').textContent = managerNotes;
+            managementDisplay.style.display = 'block';
+        });
+        // On load, populate if exists
+        const savedManagement = JSON.parse(localStorage.getItem('managementDetails') || '{}');
+        if (savedManagement.managerName) document.getElementById('managerName').value = savedManagement.managerName;
+        if (savedManagement.managerPhone) document.getElementById('managerPhone').value = savedManagement.managerPhone;
+        if (savedManagement.managerEmail) document.getElementById('managerEmail').value = savedManagement.managerEmail;
+        if (savedManagement.managerNotes) document.getElementById('managerNotes').value = savedManagement.managerNotes;
+        if (savedManagement.managerName || savedManagement.managerPhone || savedManagement.managerEmail || savedManagement.managerNotes) {
+            document.getElementById('display_manager_name').textContent = savedManagement.managerName || '';
+            document.getElementById('display_manager_phone').textContent = savedManagement.managerPhone || '';
+            document.getElementById('display_manager_email').textContent = savedManagement.managerEmail || '';
+            document.getElementById('display_manager_notes').textContent = savedManagement.managerNotes || '';
+            managementDisplay.style.display = 'block';
+        }
+    }
+
+    // --- Attendance Log Logic ---
+    const attendanceTableBody = document.getElementById('attendanceTableBody');
+    if (attendanceTableBody) {
+        // Get today's date in readable format
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const todayStr = today.toLocaleDateString('en-US', options);
+        // Get attendance from localStorage or set today's as present
+        let attendance = JSON.parse(localStorage.getItem('attendanceLog') || '[]');
+        if (!attendance.length || attendance[0].date !== todayStr) {
+            attendance.unshift({ date: todayStr, status: 'Present' });
+            localStorage.setItem('attendanceLog', JSON.stringify(attendance));
+        }
+        // Show up to 10 most recent
+        attendance.slice(0, 10).forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row.date}</td><td>${row.status}</td>`;
+            attendanceTableBody.appendChild(tr);
+        });
+    }
 });
